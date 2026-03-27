@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const link = document.getElementById('pwa-manifest');
   if (link) link.href = url;
 
-  // Generate canvas-based icon for apple-touch-icon
+  
   try {
     const canvas = document.createElement('canvas');
     canvas.width = 512; canvas.height = 512;
@@ -460,21 +460,9 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
 .modal-close { width: 32px; height: 32px; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 99px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--txt2); font-size: 14px; transition: background .15s; }
 .modal-close:hover { background: var(--border); }
 .modal-body { padding: 16px 18px 20px; }
-.history-overlay { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.7); backdrop-filter: blur(6px); display: none; }
-.history-overlay.open { display: block; }
-.history-panel {
-  position: absolute;
-  top: 0; right: 0; bottom: 0;
-  width: min(340px, 100vw);
-  background: var(--surface);
-  display: flex;
-  flex-direction: column;
-  transform: translateX(100%);
-  transition: transform .35s cubic-bezier(.16,1,.3,1);
-}
-.history-overlay.open .history-panel { transform: translateX(0); }
-.history-header { background: var(--header-bg); padding: max(1.2rem, env(safe-area-inset-top)) 1.25rem 1.25rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
-.history-list { flex: 1; overflow-y: auto; padding: 12px; background: var(--bg); transition: background .3s; }
+
+.history-overlay.open 
+
 .history-item { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; margin-bottom: 8px; cursor: pointer; transition: border-color .2s, background .3s; }
 .history-item:hover { border-color: var(--accent); }
 .history-item-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
@@ -485,7 +473,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
 .wb-ok { background: rgba(34,197,94,.12); color: #4ade80; border: 1px solid rgba(34,197,94,.2); }
 .wb-warn { background: rgba(249,115,22,.12); color: #fb923c; border: 1px solid rgba(249,115,22,.2); }
 .wb-exp { background: rgba(239,68,68,.12); color: #f87171; border: 1px solid rgba(239,68,68,.2); }
-.history-footer { padding: 12px; border-top: 1px solid var(--border); background: var(--surface); }
+
 .autocomplete-list { position: absolute; left: 0; right: 0; top: calc(100% + 2px); z-index: 99; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); overflow: hidden; display: none; }
 .autocomplete-list.show { display: block; }
 .autocomplete-item { padding: 10px 14px; cursor: pointer; font-size: 13px; color: var(--txt); display: flex; align-items: center; gap: 8px; transition: background .15s; border-bottom: 1px solid var(--border); }
@@ -1128,10 +1116,9 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
   </div>
 </div>
 
-<!-- ══════════════ TELA AGENDA ══════════════ -->
 <div id="screen-agenda" class="screen">
 
-  <!-- Sub-tabs da agenda -->
+  
   <div class="ag-tabs">
     <button class="ag-tab active" id="agtab-visitas" onclick="agMudarAba('visitas')">
       <span class="ag-tab-icon">📅</span>Agenda
@@ -1147,7 +1134,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
     </button>
   </div>
 
-  <!-- Painel: Visitas -->
+  
   <div id="agpanel-visitas" class="ag-panel active">
     <div class="ag-panel-top">
       <span class="ag-panel-label">Agendamentos</span>
@@ -1174,7 +1161,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
     <div id="ag-lista-visitas"></div>
   </div>
 
-  <!-- Painel: Clientes -->
+  
   <div id="agpanel-clientes" class="ag-panel">
     <div class="ag-panel-top">
       <span class="ag-panel-label">Base de clientes</span>
@@ -1196,7 +1183,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
     <div id="ag-lista-clientes"></div>
   </div>
 
-  <!-- Painel: Garantias -->
+  
   <div id="agpanel-garantias" class="ag-panel">
     <div class="ag-panel-label" style="padding:0 0 10px">Garantias dos serviços</div>
     <button class="warranty-notif-btn" onclick="requestWarrantyNotifications();showToast('🔔 Notificações verificadas!')">
@@ -1205,7 +1192,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
     <div id="ag-lista-garantias"></div>
   </div>
 
-  <!-- Painel: Relatório -->
+  
   <div id="agpanel-relatorio" class="ag-panel">
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px">
       <select id="ag-rel-mes" class="ag-input" style="flex:1">
@@ -1219,7 +1206,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
       <input type="number" id="ag-rel-ano" class="ag-input" style="width:88px" placeholder="Ano" oninput="agAtualizarGrafico()">
       <button class="ag-btn-blue" onclick="agCalcularRelatorio()" style="padding:10px 14px;flex-shrink:0">📊</button>
     </div>
-    <!-- Gráfico anual -->
+    
     <div id="ag-grafico-anual" style="display:none;margin-bottom:12px">
       <div class="ag-rel-hero" style="padding:14px">
         <div id="ag-grafico-titulo" class="ag-rel-titulo" style="margin-bottom:10px">Faturamento Anual</div>
@@ -1242,9 +1229,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
   </div>
 
 </div>
-<!-- ══════════════ / AGENDA ══════════════ -->
 
-<!-- ══ TELA HISTÓRICO ══ -->
 <div id="screen-historico" class="screen">
   <div id="expiredBanner" style="display:none;background:rgba(239,68,68,.08);border-bottom:1px solid rgba(239,68,68,.15);padding:12px 16px">
     <div style="font-family:var(--font-display);font-size:11px;font-weight:800;color:#f87171;margin-bottom:8px;display:flex;align-items:center;gap:6px">
@@ -1263,7 +1248,6 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
 
 </main>
 
-<!-- Bottom nav bar -->
 <nav class="bottom-nav">
   <button class="bottom-nav-btn active" id="bnav-orcamento" onclick="switchMainTab('orcamento')">
     <span style="font-size:18px">⚡</span>
@@ -1306,7 +1290,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
     <div id="tab-perfil" class="settings-tab-content active">
       <div class="settings-section">
         <div class="settings-section-title">🖼️ Logotipo</div>
-        <!-- Preview atual -->
+        
         <div id="logoPreviewArea" style="display:none;margin-bottom:12px;text-align:center">
           <div id="logoPreviewWrap" style="display:inline-block;position:relative">
             <img id="logoPreviewImg" style="width:90px;height:90px;object-fit:cover;border:2px solid var(--border)">
@@ -1389,7 +1373,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
     </div>
 
     <div id="tab-catalogo" class="settings-tab-content" style="padding:0">
-      <!-- Stats -->
+      
       <div style="padding:12px 14px 0">
         <div class="stats-bar" style="padding:0;margin-bottom:0">
           <div class="stat-pill"><div id="stat-srv" class="stat-num" style="color:var(--c-srv,var(--accent2))">—</div><div class="stat-lbl">Serviços</div></div>
@@ -1397,12 +1381,12 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
           <div class="stat-pill"><div id="stat-custom" class="stat-num" style="color:var(--green)">0</div><div class="stat-lbl">Personalizados</div></div>
         </div>
       </div>
-      <!-- Sub-tabs -->
+      
       <div class="cat-subtabs">
         <button id="cat-btn-srv" class="cat-subtab-btn active-srv" onclick="switchCatTab('srv')">🔧 Serviços</button>
         <button id="cat-btn-mat" class="cat-subtab-btn" onclick="switchCatTab('mat')">📦 Materiais</button>
       </div>
-      <!-- Painel Serviços -->
+      
       <div id="cat-panel-srv" class="cat-panel active">
         <div style="padding:10px 14px 6px;display:flex;flex-direction:column;gap:6px">
           <div class="input-wrap">
@@ -1419,7 +1403,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
         <div id="cat-autosave-srv" class="cat-autosave">✓ Salvo automaticamente</div>
         <div id="srv-accordion" style="border-top:1px solid var(--border)"></div>
       </div>
-      <!-- Painel Materiais -->
+      
       <div id="cat-panel-mat" class="cat-panel">
         <div style="padding:10px 14px 6px;display:flex;flex-direction:column;gap:6px">
           <div class="input-wrap">
@@ -1463,7 +1447,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
       </div>
     </div>
 
-    </div><!-- /modal-scroll-body -->
+    </div>
 
     <div id="settings-save-footer" class="settings-footer" style="display:none">
       <button class="btn btn-primary" onclick="saveSettings()" style="padding:11px 28px;font-size:13px;width:auto;border-radius:12px;animation:slideUp .25s ease">
@@ -1476,7 +1460,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
 <div id="printable-area">
   <div style="font-family:'Inter',sans-serif;color:#1e293b;max-width:760px;margin:0 auto;background:#fff">
 
-    <!-- HEADER com logo como fundo -->
+    
     <div id="printHeader" style="background:#0f172a;border-radius:16px 16px 0 0;padding:32px 28px 28px;position:relative;overflow:hidden;min-height:110px">
       <div id="printLogoBg" style="position:absolute;inset:0;background-size:contain;background-position:center;background-repeat:no-repeat;opacity:0.12;display:none"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,23,42,.95) 40%,rgba(37,99,235,.3));"></div>
@@ -1504,14 +1488,14 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
       </div>
     </div>
 
-    <!-- Conector arredondado -->
+    
     <div style="height:20px;background:#0f172a;position:relative">
       <div style="position:absolute;bottom:0;left:0;right:0;height:20px;background:#fff;border-radius:16px 16px 0 0"></div>
     </div>
 
     <div style="padding:0 28px 28px">
 
-      <!-- CLIENTE + SERVIÇO -->
+      
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
         <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px">
           <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:8px">👤 Cliente</div>
@@ -1526,7 +1510,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
         </div>
       </div>
 
-      <!-- TABELA DE SERVIÇOS -->
+      
       <div style="margin-bottom:20px">
         <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#0f172a;margin-bottom:8px;display:flex;align-items:center;gap:6px">🔧 Serviços Realizados</div>
         <table style="width:100%;border-collapse:collapse">
@@ -1542,7 +1526,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
         </table>
       </div>
 
-      <!-- TABELA DE MATERIAIS -->
+      
       <div id="printMatSection" style="margin-bottom:20px;display:none">
         <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#0f172a;margin-bottom:8px">📦 Materiais Utilizados</div>
         <table style="width:100%;border-collapse:collapse">
@@ -1558,7 +1542,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
         </table>
       </div>
 
-      <!-- TOTAIS -->
+      
       <div style="display:flex;justify-content:flex-end;margin-bottom:24px">
         <div style="width:280px">
           <div style="display:flex;justify-content:space-between;font-size:12px;color:#64748b;padding:6px 0;border-bottom:1px solid #f1f5f9">
@@ -1583,12 +1567,21 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
         </div>
       </div>
 
-      <!-- FOOTER -->
+      
       <div style="border-top:1px dashed #cbd5e1;padding-top:16px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
         <div style="font-size:11px;color:#94a3b8;line-height:1.8">
           <span id="printCartoes" style="display:block"></span>
           Validade deste orçamento: <span id="printValidade" style="font-weight:700;color:#0f172a">15 dias</span>
-          <a id="printIgFooter" href="#" target="_blank" style="display:none;align-items:center;gap:5px;text-decoration:none;margin-top:2px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="igg" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#f9a825"/><stop offset="40%" stop-color="#f06292"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igg)"/><circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="2" fill="none"/><circle cx="17.2" cy="6.8" r="1.3" fill="white"/></svg><span id="printIgHandle" style="font-size:12px;font-weight:700;color:#818cf8"></span><span style="font-size:12px;color:#94a3b8"> — Veja nossos projetos 🔥 e segue! 👷‍♂️⚡</span></a>
+          <div id="printIgWrapper" style="display:none;margin-top:6px">
+            <div style="font-size:10px;color:#94a3b8;margin-bottom:5px;font-style:italic">Quer saber mais sobre nós? 👇 e SEGUE</div>
+            <a id="printIgFooter" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:7px;text-decoration:none;padding:9px 14px;background:linear-gradient(135deg,#7c4dff,#f06292,#f9a825);border-radius:10px;box-shadow:0 3px 12px rgba(124,77,255,.35)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="white" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="2" fill="none"/><circle cx="17.2" cy="6.8" r="1.3" fill="white"/></svg>
+              <span style="display:flex;flex-direction:column;gap:1px">
+                <span id="printIgHandle" style="font-size:12px;font-weight:800;color:#1e3a5f;line-height:1"></span>
+                <span style="font-size:11px;font-weight:700;color:#1e3a5f;line-height:1">Veja nossos projetos 🔥 e segue! 👷‍♂️⚡</span>
+              </span>
+            </a>
+          </div>
         </div>
         <div style="font-size:11px;color:#94a3b8;text-align:right;line-height:1.8">
           Gerado via <strong style="color:#2563eb">⚡ Eletricista Power</strong>
@@ -2347,12 +2340,6 @@ function inlineSearch(type, q) {
   box.classList.add('show');
 }
 
-function buildFilterChips() {}
-function toggleCategoryPanel() {}
-function closeCategoryPanel() {}
-function renderPanelItems() {}
-function filterPanelItems() {}
-
 function updateServiceBadge() {
   const rows = document.querySelectorAll('#srv-container .srv-row');
   const b = document.getElementById('srv-badge');
@@ -2667,14 +2654,15 @@ async function sharePDF() {
   show('printTelPrestador', !!tel);
   const igHandle = ig ? (ig.match(/instagram\.com\/([^/?#]+)/i)?.[1] || ig.replace(/^@/,'').replace(/\//g,'').trim()) : '';
   const igFooter = document.getElementById('printIgFooter');
+  const igWrapper = document.getElementById('printIgWrapper');
   const igHandleEl = document.getElementById('printIgHandle');
-  if (igFooter) {
+  if (igWrapper) {
     if (igHandle) {
-      igFooter.href = 'https://instagram.com/' + igHandle;
-      igFooter.style.display = 'flex';
+      igWrapper.style.display = 'block';
+      if (igFooter) igFooter.href = 'https://instagram.com/' + igHandle;
       if (igHandleEl) igHandleEl.textContent = '@' + igHandle;
     } else {
-      igFooter.style.display = 'none';
+      igWrapper.style.display = 'none';
     }
   }
   set('printPixVal', pix);
@@ -2981,7 +2969,6 @@ function saveSettings() {
   showToast('✅ Configurações salvas!');
 }
 
-// ── Logo Crop ──
 let _cropImg = null, _cropX = 0, _cropY = 0, _cropZoom = 1, _cropMoldura = 'quad';
 let _cropDrag = false, _cropStartX = 0, _cropStartY = 0, _cropStartOX = 0, _cropStartOY = 0;
 
@@ -3046,7 +3033,7 @@ function drawCrop() {
   const iw = _cropImg.width * scale * (W / _cropImg.width);
   const ih = _cropImg.height * scale * (W / _cropImg.width);
   ctx.drawImage(_cropImg, _cropX, _cropY, iw, ih);
-  // crop box
+  
   const size = Math.min(W, H) * 0.78;
   const bx = (W - size) / 2, by = (H - size) / 2;
   const box = document.getElementById('cropBox');
@@ -3084,7 +3071,7 @@ function setupCropEvents() {
   zoom.value = _cropZoom;
   zoom.oninput = () => { _cropZoom = parseFloat(zoom.value); drawCrop(); updatePreview(); };
 
-  // touch/mouse drag
+  
   const onStart = (cx, cy) => { _cropDrag = true; _cropStartX = cx; _cropStartY = cy; _cropStartOX = _cropX; _cropStartOY = _cropY; };
   const onMove  = (cx, cy) => { if (!_cropDrag) return; _cropX = _cropStartOX + (cx - _cropStartX); _cropY = _cropStartOY + (cy - _cropStartY); drawCrop(); updatePreview(); };
   const onEnd   = () => { _cropDrag = false; };
@@ -3462,7 +3449,6 @@ function showCatAutosave(type) {
   setTimeout(() => { el.style.display = 'none'; }, 2100);
 }
 
-// ══════════ AGENDA ══════════
 function switchMainTab(tab) {
   const screens = { orcamento: 'screen-input', agenda: 'screen-agenda', historico: 'screen-historico' };
   showScreen(screens[tab] || 'screen-input');
@@ -3737,7 +3723,6 @@ function agCalcularRelatorio() {
     relLista.appendChild(div);
   });
 }
-// ══════════ / AGENDA ══════════
 
 let _miniConfirmResolve = null;
 function miniConfirm(name) {
@@ -3760,10 +3745,10 @@ document.addEventListener('DOMContentLoaded', function() {
   requestWarrantyNotifications();
   const dsEl = document.getElementById('dataServico');
   if (dsEl) dsEl.valueAsDate = new Date();
-  // Auto-fill ano do relatório
+  
   const anoEl = document.getElementById('ag-rel-ano');
   if (anoEl && !anoEl.value) anoEl.value = new Date().getFullYear();
-  // Auto-fill mes atual
+  
   const mesEl = document.getElementById('ag-rel-mes');
   if (mesEl) mesEl.value = new Date().getMonth();
 });
@@ -3803,28 +3788,27 @@ function _sendWarrantyNotification(total, expired, near) {
 }
 </script>
 
-<!-- Logo Crop Modal -->
 <div id="logoCropModal" style="display:none;position:fixed;inset:0;z-index:998;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);align-items:center;justify-content:center">
   <div style="background:var(--surface);border-radius:22px;padding:20px;width:min(340px,94vw);display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 60px rgba(0,0,0,.5);border:1px solid var(--border)">
     <div style="font-family:var(--font-display);font-size:14px;font-weight:800;color:var(--txt);text-align:center">✂️ Ajustar Logo</div>
 
-    <!-- Canvas crop area -->
+    
     <div style="position:relative;background:var(--bg);border-radius:14px;overflow:hidden;border:1px solid var(--border);touch-action:none" id="cropArea">
       <canvas id="cropCanvas" style="width:100%;display:block;max-height:240px"></canvas>
-      <!-- crop overlay -->
+      
       <div id="cropOverlay" style="position:absolute;inset:0;pointer-events:none">
         <div id="cropBox" style="position:absolute;border:2.5px solid #fff;box-shadow:0 0 0 9999px rgba(0,0,0,.5);transition:border-radius .25s"></div>
       </div>
     </div>
 
-    <!-- Zoom slider -->
+    
     <div style="display:flex;align-items:center;gap:10px">
       <span style="font-size:14px">🔍</span>
       <input type="range" id="cropZoom" min="1" max="3" step="0.01" value="1" style="flex:1;accent-color:var(--accent)">
       <span style="font-size:14px">🔎</span>
     </div>
 
-    <!-- Moldura -->
+    
     <div>
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:8px">Moldura</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -3837,13 +3821,13 @@ function _sendWarrantyNotification(total, expired, near) {
       </div>
     </div>
 
-    <!-- Preview final -->
+    
     <div style="text-align:center">
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:8px">Preview</div>
       <canvas id="cropPreview" style="width:72px;height:72px;border:2px solid var(--border)"></canvas>
     </div>
 
-    <!-- Botões -->
+    
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
       <button onclick="closeCropModal()" style="padding:12px;font-family:var(--font-display);font-size:12px;font-weight:700;background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;color:var(--txt2);cursor:pointer">Cancelar</button>
       <button onclick="confirmCrop()" style="padding:12px;font-family:var(--font-display);font-size:12px;font-weight:700;background:var(--accent-g);border:none;border-radius:10px;color:#fff;cursor:pointer">✓ Confirmar</button>
@@ -3851,7 +3835,6 @@ function _sendWarrantyNotification(total, expired, near) {
   </div>
 </div>
 
-<!-- Mini confirm popup -->
 <div id="miniConfirm" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);align-items:center;justify-content:center">
   <div style="background:var(--surface);border-radius:18px;padding:22px 20px 16px;width:260px;box-shadow:0 16px 48px rgba(0,0,0,.4);border:1px solid var(--border);text-align:center">
     <div style="font-size:26px;margin-bottom:8px">🗑️</div>
