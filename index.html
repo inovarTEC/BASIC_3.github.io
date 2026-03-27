@@ -584,7 +584,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
 .panel-item:active { background: var(--border); }
 .panel-item:last-child { border: none; }
 .pi-icon { font-size: 18px; flex-shrink: 0; width: 24px; text-align: center; line-height: 1; }
-.pi-name { font-size: 13px; font-weight: 700; color: var(--txt); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pi-name { font-size: 13px; font-weight: 700; color: var(--txt); flex: 1; min-width: 0; overflow: hidden; white-space: normal; word-break: break-word; line-height: 1.35; }
 .pi-name em { font-style: normal; color: var(--accent); font-weight: 800; }
 .pi-name em.o { color: var(--accent2); }
 .pi-price { font-size: 11px; font-weight: 700; color: var(--txt2); flex-shrink: 0; margin-left: 4px; white-space: nowrap; }
@@ -634,9 +634,9 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
 .name-edit-input { flex:1; font-size:13px; font-weight:700; color:var(--accent); background:var(--bg); border:1.5px solid var(--accent); border-radius:7px; padding:3px 8px; outline:none; font-family:var(--font-body); min-width:0; }
 .mat-name.name-edit-input { color:var(--c-mat); border-color:var(--c-mat); }
 
-.srv-name { flex: 1; font-size: 13px; font-weight: 700; color: var(--accent); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.srv-name { flex: 1; font-size: 13px; font-weight: 700; color: var(--accent); min-width: 0; overflow: hidden; white-space: normal; word-break: break-word; line-height: 1.35; }
 .mat-top { padding: 8px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
-.mat-name { font-size: 13px; font-weight: 700; color: var(--accent2); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mat-name { font-size: 13px; font-weight: 700; color: var(--accent2); flex: 1; min-width: 0; overflow: hidden; white-space: normal; word-break: break-word; line-height: 1.35; }
 .mat-context { display: flex; gap: 4px; padding: 5px 10px; flex-wrap: wrap; border-bottom: 1px solid var(--border); min-height: 30px; align-items: center; background: var(--surface2); }
 .ctx-select { font-size: 11px; font-weight: 700; padding: 3px 8px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 6px; color: var(--txt2); outline: none; font-family: var(--font-body); cursor: pointer; transition: border-color .2s; }
 .ctx-select.bl { border-color: rgba(37,99,235,.35); color: var(--accent); }
