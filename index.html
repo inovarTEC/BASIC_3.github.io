@@ -640,6 +640,12 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
 .mat-row { background: var(--surface2); border-bottom: 1px solid var(--border); animation: rowIn .22s ease; }
 .mat-row:hover { background: var(--surface); }
 @keyframes rowIn { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+
+.srv-name, .mat-name { cursor: pointer; }
+.srv-name:hover, .mat-name:hover { opacity: .75; }
+.name-edit-input { flex:1; font-size:13px; font-weight:700; color:var(--accent); background:var(--bg); border:1.5px solid var(--accent); border-radius:7px; padding:3px 8px; outline:none; font-family:var(--font-body); min-width:0; }
+.mat-name.name-edit-input { color:var(--c-mat); border-color:var(--c-mat); }
+
 .srv-name { flex: 1; font-size: 13px; font-weight: 700; color: var(--accent); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mat-top { padding: 8px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
 .mat-name { font-size: 13px; font-weight: 700; color: var(--accent2); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -2375,12 +2381,33 @@ function updateMaterialBadge() {
   b.textContent = rows.length + (rows.length === 1 ? ' item' : ' itens') + ' — ' + formatBRL(s);
 }
 
+function editInlineName(el, cls) {
+  const cur = el.textContent;
+  const inp = document.createElement('input');
+  inp.className = 'name-edit-input';
+  inp.value = cur;
+  el.replaceWith(inp);
+  inp.focus(); inp.select();
+  const done = () => {
+    const span = document.createElement(el.tagName.toLowerCase());
+    span.className = cls;
+    span.textContent = inp.value.trim() || cur;
+    span.title = 'Toque para editar o nome';
+    span.addEventListener('click', function() { editInlineName(span, cls); });
+    inp.replaceWith(span);
+  };
+  inp.addEventListener('blur', done);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') inp.blur(); if (e.key === 'Escape') { inp.value = cur; inp.blur(); } });
+}
+
 function addService(e, s) {
   const c = document.getElementById('srv-container');
   document.getElementById('srv-empty').style.display = 'none';
   const row = document.createElement('div');
   row.className = 'srv-row';
   const nm = document.createElement('span'); nm.className = 'srv-name'; nm.textContent = s.icon + ' ' + s.n;
+  nm.title = 'Toque para editar o nome';
+  nm.addEventListener('click', function() { editInlineName(nm, 'srv-name'); });
   const pw = document.createElement('div'); pw.className = 'price-wrap';
   const pp = document.createElement('span'); pp.className = 'price-prefix'; pp.textContent = 'R$';
   const pi = document.createElement('input'); pi.className = 'price-input';
@@ -2417,6 +2444,8 @@ function addMaterial(e, m) {
   const row = document.createElement('div'); row.className = 'mat-row';
   const top = document.createElement('div'); top.className = 'mat-top';
   const mnm = document.createElement('div'); mnm.className = 'mat-name'; mnm.textContent = m.icon + ' ' + m.n;
+  mnm.title = 'Toque para editar o nome';
+  mnm.addEventListener('click', function() { editInlineName(mnm, 'mat-name'); });
   const del = document.createElement('button'); del.className = 'delete-btn'; del.style.marginLeft = '5px';
   del.textContent = '×';
   del.addEventListener('click', function() {
