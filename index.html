@@ -625,9 +625,60 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
 }
 .srv-row:last-child { border-bottom: none; }
 .srv-row:hover { background: rgba(37,99,235,.07); }
+/* ── Material Accordíon ── */
 .mat-row { background: var(--surface2); border-bottom: 1px solid var(--border); animation: rowIn .22s ease; }
-.mat-row:hover { background: var(--surface); }
+.mat-row:last-child { border-bottom: none; }
+.mat-top {
+  padding: 8px 10px 8px 14px;
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  transition: background .15s;
+}
+.mat-top:hover { background: rgba(249,115,22,.06); }
+.mat-accordion {
+  display: none;
+  border-top: 1px solid var(--border);
+  animation: slideUp .18s ease;
+}
+.mat-accordion.open { display: block; }
+.mat-acc-section { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+.mat-acc-section:last-child { border-bottom: none; }
+.mat-acc-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--txt3); margin-bottom: 7px; display: flex; align-items: center; gap: 5px; }
+.mat-acc-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.mat-acc-fields.full { grid-template-columns: 1fr; }
+.mat-acc-input {
+  width: 100%; padding: 7px 10px;
+  border: 1px solid var(--border2); border-radius: var(--radius-sm);
+  font-size: 12px; background: var(--input-bg); color: var(--txt);
+  outline: none; font-family: var(--font-body);
+  transition: border-color .2s;
+}
+.mat-acc-input:focus { border-color: var(--c-mat); }
+.mat-acc-input::placeholder { color: var(--txt3); }
+.mat-chevron {
+  font-size: 11px; color: var(--txt3); transition: transform .2s; margin-left: 4px; flex-shrink: 0;
+}
+.mat-top.open .mat-chevron { transform: rotate(180deg); }
+.mat-linked-badge {
+  font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 99px;
+  background: rgba(37,99,235,.1); color: var(--accent); border: 1px solid rgba(37,99,235,.2);
+  margin-left: 5px; flex-shrink: 0; white-space: nowrap;
+}
 @keyframes rowIn { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+/* ── Cores de cabo ── */
+.cabo-cores-section { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+.cabo-cor-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--border); }
+.cabo-cor-row:last-child { border-bottom: none; }
+.cabo-cor-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; border: 1.5px solid rgba(0,0,0,.15); }
+.cabo-cor-nome { font-size: 12px; font-weight: 600; color: var(--txt); flex: 1; }
+.cabo-cor-input { width: 64px; padding: 5px 8px; border: 1px solid var(--border2); border-radius: var(--radius-sm); font-size: 12px; background: var(--input-bg); color: var(--txt); outline: none; text-align: right; font-family: var(--font-body); transition: border-color .2s; }
+.cabo-cor-input:focus { border-color: var(--c-mat); }
+.cabo-cor-unit { font-size: 11px; color: var(--txt3); font-weight: 600; }
+.cabo-cor-total { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding: 6px 8px; background: var(--surface2); border-radius: var(--radius-sm); border: 1px solid var(--border); }
+.cabo-cor-total-lbl { font-size: 10px; font-weight: 700; color: var(--txt3); text-transform: uppercase; letter-spacing: .06em; }
+.cabo-cor-total-val { font-size: 12px; font-weight: 700; color: var(--txt); }
+.cabo-cor-total-val.warn { color: #f97316; }
 
 .srv-name, .mat-name { cursor: pointer; }
 .srv-name:hover, .mat-name:hover { opacity: .75; }
@@ -885,6 +936,40 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
   #printable-area { position: absolute; left: 0; top: 0; width: 100%; background: white; display: block !important; }
   @page { margin: 1cm; size: A4; }
 }
+/* ── Painel Configurador de Serviço ── */
+#srv-config-panel {
+  display: none;
+  margin: 0 14px 10px;
+  background: var(--surface);
+  border: 1.5px solid var(--c-srv);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  animation: slideUp .2s ease;
+}
+#srv-config-panel.show { display: block; }
+.scp-title { font-size: 14px; font-weight: 700; color: var(--txt); margin-bottom: 2px; }
+.scp-subtitle { font-size: 11px; color: var(--txt3); margin-bottom: 14px; }
+.scp-crow { margin-bottom: 10px; }
+.scp-lbl { font-size: 10px; color: var(--txt3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 5px; font-weight: 700; }
+.scp-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.scp-chip { padding: 5px 12px; border-radius: 99px; font-size: 12px; border: 1px solid var(--border2); color: var(--txt2); cursor: pointer; background: var(--surface2); transition: all .15s; font-weight: 500; }
+.scp-chip.on { background: var(--c-srv); color: #fff; border-color: var(--c-srv); }
+.scp-tog-row { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--txt); font-weight: 500; }
+.scp-tog { width: 38px; height: 21px; border-radius: 99px; background: var(--border2); cursor: pointer; position: relative; transition: background .2s; flex-shrink: 0; }
+.scp-tog.on { background: #22c55e; }
+.scp-tog-d { position: absolute; top: 2.5px; left: 2.5px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.scp-tog.on .scp-tog-d { transform: translateX(17px); }
+.scp-sub { margin-top: 8px; display: none; }
+.scp-sub.show { display: block; }
+.scp-inp { width: 100%; padding: 8px 10px; border: 1px solid var(--border2); border-radius: var(--radius-sm); font-size: 13px; background: var(--input-bg); color: var(--txt); outline: none; margin-top: 4px; }
+.scp-mat-preview { background: var(--surface2); border-radius: var(--radius-sm); padding: 10px 12px; margin: 10px 0 0; }
+.scp-mp-title { font-size: 10px; color: var(--txt3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; font-weight: 700; }
+.scp-mp-item { display: flex; justify-content: space-between; font-size: 12px; color: var(--txt); padding: 3px 0; border-bottom: 1px solid var(--border); }
+.scp-mp-item:last-child { border: none; }
+.scp-mp-price { color: var(--txt3); font-weight: 600; }
+.scp-add-btn { width: 100%; padding: 11px; background: var(--c-srv); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 10px; letter-spacing: .03em; }
+.scp-add-btn:active { opacity: .85; }
+.scp-cancel { width: 100%; padding: 7px; background: none; color: var(--txt3); border: none; border-radius: var(--radius-sm); font-size: 12px; cursor: pointer; margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -979,6 +1064,7 @@ input, select, textarea { font-size: 16px !important; font-family: var(--font-bo
         <div id="srv-inline-results" class="inline-results"></div>
       </div>
     </div>
+    <div id="srv-config-panel"></div>
     <div id="srv-container" style="padding:4px 0 0"></div>
     <div id="srv-empty" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;color:var(--txt3);font-size:12px;font-weight:600">
       🔍 Busque um serviço acima para adicionar
@@ -2288,6 +2374,269 @@ function buildContextSelectors(ctx, tipo) {
   }
 }
 
+// ── Configurador de Serviços ──
+const MAT_PRECOS_CFG = {
+  'tomada_10a':12,'tomada_20a':18,'tomada_dupla':22,'tomada_tripla':35,
+  'cabo_15':3.5,'cabo_25':5,'cabo_4':8,'cabo_6':12,
+  'conduíte_flex_34':1.2,'conduíte_rig_34':5,'eletroduto_aco_34':15,
+  'cx_4x2':4,'cx_4x4':6,'cx_sobrepor':12,'cx_oct':5,
+  'interruptor_simples':10,'interruptor_duplo':15,'interruptor_triplo':22,'interruptor_paralelo':18,'interruptor_intermediario':25,
+  'dimmer_rotativo':35,'dimmer_touch':65,'dimmer_teto':65,
+  'luminaria_embutida':55,'luminaria_sobrepor':42,
+  'kit_ventilador':45,
+  'disjuntor_20a':20,'disjuntor_25a':22,'disjuntor_32a':25,'disjuntor_40a':55,'disjuntor_50a':70,'disjuntor_63a':80,
+  'dr_25a':85,'dr_40a':110,
+  'quadro_4':45,'quadro_8':70,'quadro_12':95,'quadro_16':130,'quadro_20':160,
+  'sensor_presenca':35,
+};
+const SERVICOS_CFG = [
+  {id:'tomada',n:'Instalação de tomada padrão NBR',opts:[
+    {t:'chips',k:'tipo',l:'Tipo',items:['Simples','Dupla','Tripla']},
+    {t:'chips',k:'amp',l:'Amperagem',items:['10A','20A']},
+    {t:'chips',k:'inst',l:'Instalação',items:['Embutir','Sobrepor']},
+    {t:'tog',k:'cabo',l:'Com cabeamento?',sub:[
+      {t:'chips',k:'bitola',l:'Bitola',items:['1,5mm','2,5mm','4mm','6mm']},
+      {t:'num',k:'m_cabo',l:'Metros de cabo'},
+    ]},
+    {t:'tog',k:'cond',l:'Com conduíte/eletroduto?',sub:[
+      {t:'chips',k:'tcond',l:'Tipo',items:['Flexível 3/4','Rígido PVC 3/4','Eletroduto aço 3/4']},
+      {t:'num',k:'m_cond',l:'Metros'},
+    ]},
+    {t:'tog',k:'caixa',l:'Com caixa?',sub:[
+      {t:'chips',k:'tcaixa',l:'Tipo',items:['4x2 PVC','4x4 PVC','Sobrepor metálica','Octogonal']},
+    ]},
+  ],
+  mats:function(cfg){
+    const m=[];
+    const tp=cfg.tipo||'Simples',amp=cfg.amp||'10A';
+    const key='tomada_'+(tp==='Dupla'?'dupla':tp==='Tripla'?'tripla':amp==='20A'?'20a':'10a');
+    m.push({n:'Tomada '+tp+' '+amp+(cfg.inst?' '+cfg.inst:''),q:1,p:MAT_PRECOS_CFG[key]||12});
+    if(cfg.cabo){const b=cfg.bitola||'2,5mm',mt=parseFloat(cfg.m_cabo)||3;const pk='cabo_'+b.replace(',','').replace('mm','');m.push({n:'Cabo '+b,q:mt,un:'m',p:MAT_PRECOS_CFG[pk]||5});}
+    if(cfg.cond){const tc=cfg.tcond||'Flexível 3/4',mt=parseFloat(cfg.m_cond)||2;const pk=tc.includes('aço')?'eletroduto_aco_34':tc.includes('Rígido')?'conduíte_rig_34':'conduíte_flex_34';m.push({n:tc,q:mt,un:'m',p:MAT_PRECOS_CFG[pk]||1.2});}
+    if(cfg.caixa){const tc=cfg.tcaixa||'4x2 PVC';const pk=tc.includes('4x4')?'cx_4x4':tc.includes('Sobrepor')?'cx_sobrepor':tc.includes('Oct')?'cx_oct':'cx_4x2';m.push({n:'Caixa '+tc,q:1,p:MAT_PRECOS_CFG[pk]||4});}
+    return m;
+  }},
+  {id:'interruptor',n:'Instalação de interruptor',opts:[
+    {t:'chips',k:'tipo',l:'Tipo',items:['Simples','Duplo','Triplo','Paralelo','Intermediário']},
+    {t:'chips',k:'inst',l:'Instalação',items:['Embutir','Sobrepor']},
+    {t:'tog',k:'cabo',l:'Com cabeamento?',sub:[
+      {t:'chips',k:'bitola',l:'Bitola',items:['1,5mm','2,5mm']},
+      {t:'num',k:'m_cabo',l:'Metros de cabo'},
+    ]},
+    {t:'tog',k:'caixa',l:'Com caixa?',sub:[
+      {t:'chips',k:'tcaixa',l:'Tipo',items:['4x2 PVC','4x4 PVC','Sobrepor metálica']},
+    ]},
+  ],
+  mats:function(cfg){
+    const m=[];
+    const tp=cfg.tipo||'Simples';
+    const pk='interruptor_'+tp.toLowerCase();
+    m.push({n:'Interruptor '+tp+(cfg.inst?' '+cfg.inst:''),q:1,p:MAT_PRECOS_CFG[pk]||10});
+    if(cfg.cabo){const b=cfg.bitola||'1,5mm',mt=parseFloat(cfg.m_cabo)||2;m.push({n:'Cabo '+b,q:mt,un:'m',p:MAT_PRECOS_CFG['cabo_'+b.replace(',','').replace('mm','')]||3.5});}
+    if(cfg.caixa){const tc=cfg.tcaixa||'4x2 PVC';m.push({n:'Caixa '+tc,q:1,p:MAT_PRECOS_CFG[tc.includes('4x4')?'cx_4x4':tc.includes('Sob')?'cx_sobrepor':'cx_4x2']||4});}
+    return m;
+  }},
+  {id:'luminaria',n:'Instalação de luminária',opts:[
+    {t:'chips',k:'tipo',l:'Tipo',items:['Embutida','Sobrepor','Pendente/Lustre','Spot LED']},
+    {t:'num',k:'qtd',l:'Quantidade'},
+    {t:'tog',k:'cabo',l:'Com cabeamento?',sub:[
+      {t:'chips',k:'bitola',l:'Bitola',items:['1,5mm','2,5mm']},
+      {t:'num',k:'m_cabo',l:'Metros de cabo'},
+    ]},
+  ],
+  mats:function(cfg){
+    const m=[];
+    const tp=cfg.tipo||'Embutida',qtd=parseInt(cfg.qtd)||1;
+    const pk=tp.includes('Sobr')?'luminaria_sobrepor':'luminaria_embutida';
+    m.push({n:'Luminária '+tp,q:qtd,p:MAT_PRECOS_CFG[pk]||55});
+    if(cfg.cabo){const b=cfg.bitola||'1,5mm',mt=parseFloat(cfg.m_cabo)||2;m.push({n:'Cabo '+b,q:mt,un:'m',p:MAT_PRECOS_CFG['cabo_'+b.replace(',','').replace('mm','')]||3.5});}
+    return m;
+  }},
+  {id:'ventilador',n:'Instalação de ventilador de teto',opts:[
+    {t:'chips',k:'tipo',l:'Tipo',items:['Com kit elétrico','Sem kit (só instalar)']},
+    {t:'tog',k:'cabo',l:'Com cabeamento?',sub:[
+      {t:'chips',k:'bitola',l:'Bitola',items:['1,5mm','2,5mm']},
+      {t:'num',k:'m_cabo',l:'Metros'},
+    ]},
+  ],
+  mats:function(cfg){
+    const m=[];
+    if((cfg.tipo||'').includes('kit'))m.push({n:'Kit elétrico ventilador',q:1,p:MAT_PRECOS_CFG['kit_ventilador']||45});
+    if(cfg.cabo){const b=cfg.bitola||'1,5mm',mt=parseFloat(cfg.m_cabo)||3;m.push({n:'Cabo '+b,q:mt,un:'m',p:MAT_PRECOS_CFG['cabo_'+b.replace(',','').replace('mm','')]||3.5});}
+    return m;
+  }},
+  {id:'chuveiro',n:'Instalação de chuveiro elétrico',opts:[
+    {t:'chips',k:'tipo',l:'Tipo',items:['Simples','Blindado/Ducha']},
+    {t:'chips',k:'bitola',l:'Bitola do cabo',items:['2,5mm','4mm']},
+    {t:'num',k:'m_cabo',l:'Metros de cabo'},
+    {t:'tog',k:'disjuntor',l:'Com disjuntor?',sub:[
+      {t:'chips',k:'tdisj',l:'Amperagem',items:['20A','25A','32A']},
+    ]},
+  ],
+  mats:function(cfg){
+    const m=[];
+    const b=cfg.bitola||'4mm',mt=parseFloat(cfg.m_cabo)||4;
+    m.push({n:'Cabo '+b+' (chuveiro)',q:mt,un:'m',p:MAT_PRECOS_CFG['cabo_'+b.replace(',','').replace('mm','')]||8});
+    if(cfg.disjuntor){const a=cfg.tdisj||'25A';m.push({n:'Disjuntor '+a+' monopolar',q:1,p:MAT_PRECOS_CFG['disjuntor_'+a.toLowerCase()]||22});}
+    m.push({n:'Cx passagem 4x2',q:1,p:MAT_PRECOS_CFG['cx_4x2']||4});
+    return m;
+  }},
+  {id:'quadro',n:'Instalação de quadro de distribuição',opts:[
+    {t:'chips',k:'circuitos',l:'Capacidade',items:['4 circuitos','8 circuitos','12 circuitos','16 circuitos','20 circuitos']},
+    {t:'chips',k:'tipo',l:'Tipo',items:['Embutir','Sobrepor']},
+    {t:'tog',k:'dr',l:'Com DR?',sub:[
+      {t:'chips',k:'tdr',l:'Amperagem',items:['25A','40A']},
+    ]},
+  ],
+  mats:function(cfg){
+    const m=[];
+    const circ=cfg.circuitos||'8 circuitos';
+    const pk='quadro_'+circ.replace(' circuitos','');
+    m.push({n:'Quadro '+circ+' '+(cfg.tipo||'Embutir'),q:1,p:MAT_PRECOS_CFG[pk]||70});
+    if(cfg.dr){const a=cfg.tdr||'40A';m.push({n:'DR '+a+' bipolar 30mA',q:1,p:MAT_PRECOS_CFG['dr_'+a.toLowerCase()]||110});}
+    return m;
+  }},
+  {id:'sensor',n:'Instalação de sensor de presença',opts:[
+    {t:'chips',k:'tipo',l:'Tipo',items:['Teto 360°','Parede 180°']},
+    {t:'tog',k:'cabo',l:'Com cabeamento?',sub:[
+      {t:'chips',k:'bitola',l:'Bitola',items:['1,5mm','2,5mm']},
+      {t:'num',k:'m_cabo',l:'Metros'},
+    ]},
+  ],
+  mats:function(cfg){
+    const m=[];
+    m.push({n:'Sensor de presença '+(cfg.tipo||'Teto 360°'),q:1,p:MAT_PRECOS_CFG['sensor_presenca']||35});
+    if(cfg.cabo){const b=cfg.bitola||'1,5mm',mt=parseFloat(cfg.m_cabo)||2;m.push({n:'Cabo '+b,q:mt,un:'m',p:MAT_PRECOS_CFG['cabo_'+b.replace(',','').replace('mm','')]||3.5});}
+    return m;
+  }},
+  {id:'dimmer',n:'Instalação de dimmer/variador',opts:[
+    {t:'chips',k:'tipo',l:'Tipo',items:['Rotativo 600W','Touch 400W','De teto']},
+    {t:'chips',k:'inst',l:'Instalação',items:['Embutir','Sobrepor']},
+  ],
+  mats:function(cfg){
+    const m=[];
+    const tp=cfg.tipo||'Rotativo 600W';
+    const pk=tp.includes('Touch')?'dimmer_touch':tp.includes('teto')?'dimmer_teto':'dimmer_rotativo';
+    m.push({n:'Dimmer '+tp+(cfg.inst?' '+cfg.inst:''),q:1,p:MAT_PRECOS_CFG[pk]||35});
+    return m;
+  }},
+];
+
+let scpAtivo = null;
+let scpEstado = {};
+
+function scpFmtBRL(v){return'R$ '+v.toFixed(2).replace('.',',');}
+
+function abrirConfigurador(srvData) {
+  const keywords = srvData.n.toLowerCase();
+  // Tenta match direto por palavras-chave do id ou nome do configurador
+  const cfg = SERVICOS_CFG.find(s => {
+    return keywords.includes(s.id) ||
+      s.n.toLowerCase().split(' ').filter(w => w.length > 4).some(w => keywords.includes(w));
+  });
+  if (!cfg) {
+    // Sem configuração avançada: adiciona direto
+    const fakeE = { target: document.getElementById('srv-inline-search'), stopPropagation: ()=>{} };
+    addService(fakeE, srvData);
+    document.getElementById('srv-inline-search').value = '';
+    return;
+  }
+  scpAtivo = { ...cfg, srvData };
+  scpEstado = {};
+  renderConfigurador();
+}
+
+function renderConfigurador() {
+  const s = scpAtivo;
+  const panel = document.getElementById('srv-config-panel');
+  let html = `<div class="scp-title">${s.srvData.icon||'🔧'} ${s.srvData.n}</div>`;
+  html += `<div class="scp-subtitle">${scpFmtBRL(s.srvData.v||0)} — configure os detalhes abaixo</div>`;
+  s.opts.forEach(o => {
+    if (o.t === 'chips') {
+      if (!scpEstado[o.k]) scpEstado[o.k] = o.items[0];
+      html += `<div class="scp-crow"><div class="scp-lbl">${o.l}</div><div class="scp-chips" data-k="${o.k}">` +
+        o.items.map((it,i) => `<div class="scp-chip${i===0?' on':''}" onclick="scpSetChip('${o.k}','${it}',this)">${it}</div>`).join('') +
+        '</div></div>';
+    } else if (o.t === 'num') {
+      html += `<div class="scp-crow"><div class="scp-lbl">${o.l}</div><input class="scp-inp" type="number" min="1" placeholder="ex: 3" oninput="scpSetVal('${o.k}',this.value)" value="${scpEstado[o.k]||''}"></div>`;
+    } else if (o.t === 'tog') {
+      const isOn = !!scpEstado[o.k];
+      html += `<div class="scp-crow"><div class="scp-tog-row"><span>${o.l}</span><div class="scp-tog${isOn?' on':''}" onclick="scpSetTog('${o.k}',this)"><div class="scp-tog-d"></div></div></div>`;
+      html += `<div class="scp-sub${isOn?' show':''}" id="scpsub_${o.k}">`;
+      o.sub.forEach(s2 => {
+        if (s2.t === 'chips') {
+          if (!scpEstado[s2.k]) scpEstado[s2.k] = s2.items[0];
+          html += `<div style="margin-top:8px"><div class="scp-lbl">${s2.l}</div><div class="scp-chips" data-k="${s2.k}">` +
+            s2.items.map((it,i) => `<div class="scp-chip${i===0?' on':''}" onclick="scpSetChip('${s2.k}','${it}',this)">${it}</div>`).join('') + '</div></div>';
+        } else if (s2.t === 'num') {
+          html += `<div style="margin-top:6px"><div class="scp-lbl">${s2.l}</div><input class="scp-inp" type="number" min="1" placeholder="ex: 3" oninput="scpSetVal('${s2.k}',this.value)" value="${scpEstado[s2.k]||''}"></div>`;
+        }
+      });
+      html += '</div></div>';
+    }
+  });
+  html += `<div class="scp-mat-preview"><div class="scp-mp-title">📦 Materiais que serão adicionados</div><div id="scp-mp-list"></div></div>`;
+  html += `<button class="scp-add-btn" onclick="scpAdicionar()">✓ Adicionar serviço + materiais ao orçamento</button>`;
+  html += `<button class="scp-cancel" onclick="fecharConfigurador()">Cancelar</button>`;
+  panel.innerHTML = html;
+  panel.classList.add('show');
+  scpAtualizarPreview();
+}
+
+function scpSetChip(k, v, el) {
+  scpEstado[k] = v;
+  el.closest('.scp-chips').querySelectorAll('.scp-chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  scpAtualizarPreview();
+}
+function scpSetVal(k, v) { scpEstado[k] = v; scpAtualizarPreview(); }
+function scpSetTog(k, el) {
+  el.classList.toggle('on');
+  scpEstado[k] = el.classList.contains('on');
+  const sub = document.getElementById('scpsub_' + k);
+  if (sub) sub.classList.toggle('show', !!scpEstado[k]);
+  scpAtualizarPreview();
+}
+function scpAtualizarPreview() {
+  if (!scpAtivo) return;
+  const mats = scpAtivo.mats(scpEstado);
+  const list = document.getElementById('scp-mp-list');
+  if (!list) return;
+  if (!mats.length) { list.innerHTML = '<div style="font-size:12px;color:var(--txt3);padding:4px 0">Nenhum material necessário</div>'; return; }
+  list.innerHTML = mats.map(m =>
+    `<div class="scp-mp-item"><span>${m.n}${m.q > 1 ? ' × ' + m.q + (m.un || ' un') : ' × 1 un'}</span><span class="scp-mp-price">${scpFmtBRL(m.p * (m.q || 1))}</span></div>`
+  ).join('');
+}
+function scpAdicionar() {
+  if (!scpAtivo) return;
+  const srvId = 'srv_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+  const fakeE = { target: null, stopPropagation: ()=>{} };
+  addService(fakeE, scpAtivo.srvData, srvId);
+  // Adicionar materiais vinculados
+  const mats = scpAtivo.mats(scpEstado);
+  mats.forEach(m => {
+    const matObj = {
+      icon: '📦',
+      n: m.n,
+      p: m.p,   // preço unitário base (sem multiplicar qty)
+      t: ''
+    };
+    const fakeEm = { target: null, stopPropagation: ()=>{} };
+    addMaterial(fakeEm, matObj, srvId, m.q || 1, m.p);
+  });
+  fecharConfigurador();
+  if (mats.length > 0)
+    showToast('✅ Serviço + ' + mats.length + ' material(is) adicionados!');
+}
+function fecharConfigurador() {
+  const panel = document.getElementById('srv-config-panel');
+  panel.classList.remove('show');
+  panel.innerHTML = '';
+  scpAtivo = null;
+  scpEstado = {};
+  document.getElementById('srv-inline-search').value = '';
+}
+
 function inlineSearch(type, q) {
   const inp = document.getElementById(type + '-inline-search');
   const box = document.getElementById(type + '-inline-results');
@@ -2325,13 +2674,33 @@ function inlineSearch(type, q) {
       const ico = document.createElement('span'); ico.className = 'pi-icon'; ico.textContent = d.icon;
       const nm = document.createElement('span'); nm.className = 'pi-name'; nm.innerHTML = hl;
       const vl = document.createElement('span'); vl.className = 'pi-price'; vl.textContent = val;
-      const btn = document.createElement('button'); btn.className = ac; btn.textContent = '+';
+      const btn = document.createElement('button'); btn.className = ac; btn.textContent = type === 'srv' ? '⚙' : '+';
+      btn.title = type === 'srv' ? 'Configurar e adicionar' : 'Adicionar';
       btn.addEventListener('click', function(ev) {
         ev.stopPropagation();
-        addCatalogItem(ev, type, d);
-        inp.value = '';
-        box.classList.remove('show');
-        box.innerHTML = '';
+        if (type === 'srv') {
+          // Verifica se tem configuração avançada disponível
+          const hasCfg = SERVICOS_CFG.some(s => {
+            const kw = d.n.toLowerCase();
+            return kw.includes(s.id) || s.n.toLowerCase().split(' ').slice(1).some(w => w.length > 3 && kw.includes(w));
+          });
+          if (hasCfg) {
+            inp.value = d.n;
+            box.classList.remove('show');
+            box.innerHTML = '';
+            abrirConfigurador(d);
+          } else {
+            addCatalogItem(ev, type, d);
+            inp.value = '';
+            box.classList.remove('show');
+            box.innerHTML = '';
+          }
+        } else {
+          addCatalogItem(ev, type, d);
+          inp.value = '';
+          box.classList.remove('show');
+          box.innerHTML = '';
+        }
       });
       row.appendChild(ico); row.appendChild(nm); row.appendChild(vl); row.appendChild(btn);
       box.appendChild(row);
@@ -2387,12 +2756,13 @@ function editInlineName(el, cls) {
   inp.addEventListener('keydown', e => { if (e.key === 'Enter') inp.blur(); if (e.key === 'Escape') { inp.value = cur; inp.blur(); } });
 }
 
-function addService(e, s) {
+function addService(e, s, srvId) {
   const c = document.getElementById('srv-container');
   document.getElementById('srv-empty').style.display = 'none';
   const row = document.createElement('div');
   row.className = 'srv-row';
-  const nm = document.createElement('span'); nm.className = 'srv-name'; nm.textContent = s.icon + ' ' + s.n;
+  if (srvId) row.dataset.srvId = srvId;
+  const nm = document.createElement('span'); nm.className = 'srv-name'; nm.textContent = (s.icon ? s.icon + ' ' : '') + s.n;
   nm.title = 'Toque para editar o nome';
   nm.addEventListener('click', function() { editInlineName(nm, 'srv-name'); });
   const pw = document.createElement('div'); pw.className = 'price-wrap';
@@ -2404,15 +2774,22 @@ function addService(e, s) {
   pw.appendChild(pp); pw.appendChild(pi);
   const qw = document.createElement('div'); qw.className = 'qty-wrap';
   const qm = document.createElement('button'); qm.className = 'qty-btn'; qm.textContent = '−';
-  qm.addEventListener('click', function() { changeQty(this, -1); updateFloatingButton(); });
+  qm.addEventListener('click', function() { changeQty(this, -1); updateFloatingButton(); propagateQtyToMaterials(row); });
   const qi = document.createElement('input');
   qi.className = 'qty-val'; qi.type = 'number'; qi.value = '1'; qi.min = '1';
-  qi.addEventListener('input', function() { updateFloatingButton(); });
+  qi.addEventListener('input', function() { updateFloatingButton(); propagateQtyToMaterials(row); });
   const qp = document.createElement('button'); qp.className = 'qty-btn'; qp.textContent = '+';
-  qp.addEventListener('click', function() { changeQty(this, 1); updateFloatingButton(); });
+  qp.addEventListener('click', function() { changeQty(this, 1); updateFloatingButton(); propagateQtyToMaterials(row); });
   qw.appendChild(qm); qw.appendChild(qi); qw.appendChild(qp);
   const del = document.createElement('button'); del.className = 'delete-btn'; del.textContent = '×';
   del.addEventListener('click', function() {
+    // Remover materiais vinculados junto
+    if (row.dataset.srvId) {
+      document.querySelectorAll(`#mat-container .mat-row[data-linked-srv="${row.dataset.srvId}"]`).forEach(mr => mr.remove());
+      if (!document.querySelector('#mat-container .mat-row'))
+        document.getElementById('mat-empty').style.display = 'flex';
+      updateMaterialBadge();
+    }
     row.remove();
     if (!document.querySelector('#srv-container .srv-row'))
       document.getElementById('srv-empty').style.display = 'flex';
@@ -2421,52 +2798,210 @@ function addService(e, s) {
   row.appendChild(nm); row.appendChild(pw); row.appendChild(qw); row.appendChild(del);
   c.appendChild(row);
   updateServiceBadge(); updateFloatingButton();
-  flashButton(e.target);
-  showToast(s.n + ' adicionado');
+  if (e && e.target) flashButton(e.target);
+  showToast((s.icon ? s.icon + ' ' : '') + s.n + ' adicionado');
 }
 
-function addMaterial(e, m) {
+function propagateQtyToMaterials(srvRow) {
+  const srvId = srvRow.dataset.srvId;
+  if (!srvId) return;
+  const newQty = parseInt(srvRow.querySelector('.qty-val')?.value || 1);
+  document.querySelectorAll(`#mat-container .mat-row[data-linked-srv="${srvId}"]`).forEach(mr => {
+    // Só atualiza quantidade se não foi editada manualmente
+    if (mr.dataset.qtyManual === '1') return;
+    const baseQty = parseFloat(mr.dataset.baseQty || 1);
+    const qi = mr.querySelector('.qty-val');
+    const pi = mr.querySelector('.price-input');
+    const baseUnitPrice = parseFloat(mr.dataset.baseUnitPrice || 0);
+    if (qi) qi.value = Math.max(1, Math.round(baseQty * newQty));
+    if (pi && baseUnitPrice > 0 && !mr.dataset.priceManual) {
+      const total = baseUnitPrice * baseQty * newQty;
+      pi.value = total.toFixed(2).replace('.', ',');
+    }
+    updateMaterialBadge();
+  });
+}
+
+function addMaterial(e, m, linkedSrvId, baseQty, baseUnitPrice) {
   const c = document.getElementById('mat-container');
   document.getElementById('mat-empty').style.display = 'none';
   const row = document.createElement('div'); row.className = 'mat-row';
+  if (linkedSrvId) {
+    row.dataset.linkedSrv = linkedSrvId;
+    row.dataset.baseQty = baseQty || 1;
+    row.dataset.baseUnitPrice = baseUnitPrice || 0;
+  }
+
+  // ── HEADER (mat-top) ──
   const top = document.createElement('div'); top.className = 'mat-top';
-  const mnm = document.createElement('div'); mnm.className = 'mat-name'; mnm.textContent = m.icon + ' ' + m.n;
+
+  const nameWrap = document.createElement('div');
+  nameWrap.style.cssText = 'display:flex;align-items:center;flex:1;min-width:0;gap:4px;';
+
+  const mnm = document.createElement('div'); mnm.className = 'mat-name';
+  mnm.textContent = (m.icon ? m.icon + ' ' : '📦 ') + m.n;
   mnm.title = 'Toque para editar o nome';
-  mnm.addEventListener('click', function() { editInlineName(mnm, 'mat-name'); });
-  const del = document.createElement('button'); del.className = 'delete-btn'; del.style.marginLeft = '5px';
-  del.textContent = '×';
-  del.addEventListener('click', function() {
+  mnm.addEventListener('click', function(ev) { ev.stopPropagation(); editInlineName(mnm, 'mat-name'); });
+
+  if (linkedSrvId) {
+    const badge = document.createElement('span'); badge.className = 'mat-linked-badge'; badge.textContent = '🔗 vinc.';
+    nameWrap.appendChild(mnm); nameWrap.appendChild(badge);
+  } else {
+    nameWrap.appendChild(mnm);
+  }
+
+  const rightWrap = document.createElement('div');
+  rightWrap.style.cssText = 'display:flex;align-items:center;gap:4px;flex-shrink:0;';
+
+  const chevron = document.createElement('span'); chevron.className = 'mat-chevron'; chevron.textContent = '▾';
+
+  const del = document.createElement('button'); del.className = 'delete-btn'; del.textContent = '×';
+  del.addEventListener('click', function(ev) {
+    ev.stopPropagation();
     row.remove();
     if (!document.querySelector('#mat-container .mat-row'))
       document.getElementById('mat-empty').style.display = 'flex';
     updateMaterialBadge();
   });
-  top.appendChild(mnm); top.appendChild(del);
-  const ctx = document.createElement('div'); ctx.className = 'mat-context';
-  buildContextSelectors(ctx, m.t || '');
-  const bot = document.createElement('div'); bot.className = 'mat-bottom';
+
+  rightWrap.appendChild(chevron); rightWrap.appendChild(del);
+  top.appendChild(nameWrap); top.appendChild(rightWrap);
+
+  // ── ACCORDÍON ──
+  const acc = document.createElement('div'); acc.className = 'mat-accordion';
+
+  // Seção 1: Preço e Quantidade
+  const secPQ = document.createElement('div'); secPQ.className = 'mat-acc-section';
+  const lblPQ = document.createElement('div'); lblPQ.className = 'mat-acc-label'; lblPQ.textContent = '💰 Preço unitário e quantidade';
+  const botFields = document.createElement('div'); botFields.style.cssText = 'display:flex;align-items:center;gap:6px;';
   const pw = document.createElement('div'); pw.className = 'price-wrap';
   const pp = document.createElement('span'); pp.className = 'price-prefix'; pp.textContent = 'R$';
   const pi = document.createElement('input'); pi.className = 'price-input';
   const pv = typeof m.p === 'number' ? m.p.toFixed(2).replace('.',',') : String(m.p);
   pi.value = pv;
-  pi.addEventListener('input', function() { formatPriceInput(this); updateMaterialBadge(); });
+  pi.addEventListener('input', function() {
+    formatPriceInput(this); updateMaterialBadge();
+    if (linkedSrvId) row.dataset.priceManual = '1';
+  });
   pw.appendChild(pp); pw.appendChild(pi);
   const qw = document.createElement('div'); qw.className = 'qty-wrap';
   const qm = document.createElement('button'); qm.className = 'qty-btn'; qm.textContent = '−';
-  qm.addEventListener('click', function() { changeQty(this, -1); updateMaterialBadge(); });
+  qm.addEventListener('click', function() { changeQty(this, -1); updateMaterialBadge(); if (linkedSrvId) row.dataset.qtyManual = '1'; });
   const qi = document.createElement('input');
-  qi.className = 'qty-val'; qi.type = 'number'; qi.value = '1'; qi.min = '1';
-  qi.addEventListener('input', function() { updateMaterialBadge(); });
+  qi.className = 'qty-val'; qi.type = 'number'; qi.value = String(baseQty && baseQty > 0 ? Math.max(1, Math.round(baseQty)) : 1); qi.min = '1';
+  qi.addEventListener('input', function() { updateMaterialBadge(); if (linkedSrvId) row.dataset.qtyManual = '1'; });
   const qp = document.createElement('button'); qp.className = 'qty-btn'; qp.textContent = '+';
-  qp.addEventListener('click', function() { changeQty(this, 1); updateMaterialBadge(); });
+  qp.addEventListener('click', function() { changeQty(this, 1); updateMaterialBadge(); if (linkedSrvId) row.dataset.qtyManual = '1'; });
   qw.appendChild(qm); qw.appendChild(qi); qw.appendChild(qp);
-  bot.appendChild(pw); bot.appendChild(qw);
-  row.appendChild(top); row.appendChild(ctx); row.appendChild(bot);
+  botFields.appendChild(pw); botFields.appendChild(qw);
+  secPQ.appendChild(lblPQ); secPQ.appendChild(botFields);
+
+  // Seção 2: Configurações (ctx selectors - já existia)
+  const secCfg = document.createElement('div'); secCfg.className = 'mat-acc-section';
+  const lblCfg = document.createElement('div'); lblCfg.className = 'mat-acc-label'; lblCfg.textContent = '⚙️ Configurações';
+  const ctx = document.createElement('div'); ctx.className = 'mat-context'; ctx.style.cssText = 'padding:0;border:none;min-height:0;background:none;';
+  buildContextSelectors(ctx, m.t || '');
+  if (!ctx.hasChildNodes()) {
+    const noOpts = document.createElement('span');
+    noOpts.style.cssText = 'font-size:11px;color:var(--txt3);';
+    noOpts.textContent = 'Nenhuma configuração disponível para este material.';
+    ctx.appendChild(noOpts);
+  }
+  secCfg.appendChild(lblCfg); secCfg.appendChild(ctx);
+
+  // Seção 3: Detalhes técnicos
+  const secDet = document.createElement('div'); secDet.className = 'mat-acc-section';
+  const lblDet = document.createElement('div'); lblDet.className = 'mat-acc-label'; lblDet.textContent = '🏷️ Detalhes técnicos';
+  const detFields = document.createElement('div'); detFields.className = 'mat-acc-fields';
+  const mkInput = (ph, fullWidth) => {
+    const inp = document.createElement('input'); inp.className = 'mat-acc-input';
+    inp.placeholder = ph; inp.type = 'text';
+    if (fullWidth) inp.style.gridColumn = '1/-1';
+    return inp;
+  };
+  detFields.appendChild(mkInput('Marca / fabricante'));
+  detFields.appendChild(mkInput('Especificação (ex: 127V, 60Hz)'));
+  const obsInp = mkInput('Observação técnica...', true);
+  detFields.appendChild(obsInp);
+  secDet.appendChild(lblDet); secDet.appendChild(detFields);
+
+  acc.appendChild(secPQ); acc.appendChild(secCfg);
+
+  // Seção de cores — só para cabos/fios
+  const isCabo = /cabo|fio/i.test(m.n);
+  if (isCabo) {
+    const CABO_CORES = [
+      { nome: 'Vermelho', hex: '#ef4444' },
+      { nome: 'Preto',    hex: '#1f2937' },
+      { nome: 'Azul claro', hex: '#3b82f6' },
+      { nome: 'Verde/Amarelo', hex: '#84cc16', split: true },
+      { nome: 'Amarelo',  hex: '#eab308' },
+    ];
+    const secCores = document.createElement('div'); secCores.className = 'mat-acc-section cabo-cores-section';
+    const lblCores = document.createElement('div'); lblCores.className = 'mat-acc-label'; lblCores.textContent = '🎨 Metros por cor';
+    secCores.appendChild(lblCores);
+
+    const totalEl = document.createElement('div'); totalEl.className = 'cabo-cor-total';
+    const totalLbl = document.createElement('span'); totalLbl.className = 'cabo-cor-total-lbl'; totalLbl.textContent = 'Total distribuído';
+    const totalVal = document.createElement('span'); totalVal.className = 'cabo-cor-total-val'; totalVal.textContent = '0 m';
+    totalEl.appendChild(totalLbl); totalEl.appendChild(totalVal);
+
+    const corInputs = [];
+
+    const recalcTotal = () => {
+      const soma = corInputs.reduce((acc, inp) => acc + (parseFloat(inp.value) || 0), 0);
+      const qtdTotal = parseFloat(qi.value) || 0;
+      totalVal.textContent = soma.toFixed(1) + ' m';
+      if (qtdTotal > 0 && Math.abs(soma - qtdTotal) > 0.05) {
+        totalVal.classList.add('warn');
+        totalVal.title = `Total do material: ${qtdTotal}m — distribua exatamente essa quantidade`;
+      } else {
+        totalVal.classList.remove('warn');
+        totalVal.title = '';
+      }
+    };
+
+    CABO_CORES.forEach(cor => {
+      const row = document.createElement('div'); row.className = 'cabo-cor-row';
+      const dot = document.createElement('span'); dot.className = 'cabo-cor-dot';
+      if (cor.split) {
+        dot.style.background = 'linear-gradient(135deg, #16a34a 50%, #eab308 50%)';
+      } else {
+        dot.style.background = cor.hex;
+      }
+      const nome = document.createElement('span'); nome.className = 'cabo-cor-nome'; nome.textContent = cor.nome;
+      const inp = document.createElement('input'); inp.className = 'cabo-cor-input';
+      inp.type = 'number'; inp.min = '0'; inp.step = '0.5'; inp.placeholder = '0';
+      inp.addEventListener('input', recalcTotal);
+      corInputs.push(inp);
+      const unit = document.createElement('span'); unit.className = 'cabo-cor-unit'; unit.textContent = 'm';
+      row.appendChild(dot); row.appendChild(nome); row.appendChild(inp); row.appendChild(unit);
+      secCores.appendChild(row);
+    });
+
+    secCores.appendChild(totalEl);
+
+    // Atualiza total quando qty do material muda
+    qi.addEventListener('input', recalcTotal);
+    qm.addEventListener('click', () => setTimeout(recalcTotal, 10));
+    qp.addEventListener('click', () => setTimeout(recalcTotal, 10));
+
+    acc.appendChild(secCores);
+  }
+
+  acc.appendChild(secDet);
+
+  // Toggle accordíon ao clicar no top
+  top.addEventListener('click', function() {
+    const isOpen = acc.classList.toggle('open');
+    top.classList.toggle('open', isOpen);
+  });
+
+  row.appendChild(top); row.appendChild(acc);
   c.appendChild(row);
   updateMaterialBadge();
-  flashButton(e.target);
-  showToast(m.n + ' adicionado');
+  if (e && e.target) flashButton(e.target);
+  if (!linkedSrvId) showToast('📦 ' + m.n + ' adicionado');
 }
 
 function updateFloatingButton() {
